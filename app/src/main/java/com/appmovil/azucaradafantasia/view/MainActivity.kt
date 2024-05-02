@@ -1,10 +1,11 @@
-package com.appmovil.azucaradafantasia
+package com.appmovil.azucaradafantasia.view
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.appmovil.azucaradafantasia.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
