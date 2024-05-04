@@ -35,6 +35,10 @@ class HomeInventoryFragment : Fragment() {
 
     //llama los componentes de la vista para tener all mejor ordenado, cuando le dé clic al botón vaya a controladores()
     private fun controladores() {
+        binding.fbagregar.setOnClickListener {//al dar clic me lleve al fragment de agregar
+            findNavController().navigate(R.id.action_homeInventoryFragment_to_addItemFragment)
+        }
+
         recycler()
     }
 
