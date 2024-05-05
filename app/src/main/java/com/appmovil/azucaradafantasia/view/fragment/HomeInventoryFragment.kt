@@ -38,25 +38,8 @@ class HomeInventoryFragment : Fragment() {
         binding.fbagregar.setOnClickListener {//al dar clic me lleve al fragment de agregar
             findNavController().navigate(R.id.action_homeInventoryFragment_to_addItemFragment)
         }
-
-        recycler()
-    }
-
-    fun recycler(){
-        var listaPasteles = mutableListOf(
-            Inventory("Pastel de Chocolate", 12000, 5),
-            Inventory( "Pastel de Vainilla", 11000, 2),
-            Inventory( "Pastel de Fresa", 10500, 1),
-            Inventory( "Pastel de Avena", 16000, 6),
-            Inventory( "Pastel de Durazno", 19000, 2),
-        )
-
-        val recyclerVar = binding.recyclerview
-        recyclerVar.layoutManager = LinearLayoutManager(context)
-        val adapter = InventoryAdapter(listaPasteles)
-        recyclerVar.adapter = adapter
-        adapter.notifyDataSetChanged()
-
+        //Se eliminan los datos quemados
+        // recycler()
     }
 
 
