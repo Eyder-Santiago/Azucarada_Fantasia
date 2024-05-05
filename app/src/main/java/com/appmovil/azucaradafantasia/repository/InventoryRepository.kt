@@ -7,11 +7,10 @@ import com.appmovil.azucaradafantasia.model.Inventory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class InventoryRepository(val context: Context) {
-    private var inventoryDao: InventoryDao = InventoryDB.getDatabase(context).inventoryDao()
-    //private var apiService: ApiService = ApiUtils.getApiService()
-    suspend fun saveInventory(inventory: Inventory) {
-        withContext(Dispatchers.IO) {
+class InventoryRepository(val context: Context){
+    private var inventoryDao:InventoryDao = InventoryDB.getDatabase(context).inventoryDao()
+    suspend fun saveInventory(inventory:Inventory){
+        withContext(Dispatchers.IO){
             inventoryDao.saveInventory(inventory)
         }
     }
@@ -21,4 +20,7 @@ class InventoryRepository(val context: Context) {
             inventoryDao.getListInventory() //tiene toda la información de los cambios
         }
     }
+
+
+
 }

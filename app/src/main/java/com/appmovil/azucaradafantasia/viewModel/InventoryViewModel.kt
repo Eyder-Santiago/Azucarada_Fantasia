@@ -11,28 +11,45 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class InventoryViewModel(application: Application) : AndroidViewModel(application) {
-    //Crear el método de guardar; se llama el método saveInventoy() de la clase AddItemFragment
     val context = getApplication<Application>()
     private val inventoryRepository = InventoryRepository(context)
 
-    //creando los observadores livedata
+    //usando los liveData, observa los cambios de la lista de inventario; captura los cambios con la variable _listInventory
     private val _listInventory = MutableLiveData<MutableList<Inventory>>()
-    val listInventory: LiveData<MutableList<Inventory>> get() = _listInventory //recibe la lista de inventario
+    val listInventory: LiveData<MutableList<Inventory>> get() = _listInventory
 
     private val _progresState = MutableLiveData(false)
     val progresState: LiveData<Boolean> = _progresState
 
+
+
     fun saveInventory(inventory: Inventory) {  //creando un escenario donde un método que no es una ecorrutina
         viewModelScope.launch {
-            inventoryRepository.saveInventory(inventory) //método guardar que es de segundo plano
-        }
 
+            _progresState.value = true
+            try {
+                inventoryRepository.saveInventory(inventory) //método guardar que es de segundo plano
+                _progresState.value = false
+            } catch (e: Exception) {
+                _progresState.value = false
+            }
+        }
     }
 
     fun getListInventory() {
         viewModelScope.launch {
-            _listInventory.value = inventoryRepository.getListInventory()
+            _progresState.value = true
+            try {
+                _listInventory.value = inventoryRepository.getListInventory() //obteniendo la lista de inventario (los cambios)
+                _progresState.value = false
+            } catch (e: Exception) {
+                _progresState.value = false
+            }
+
         }
     }
+
+
+
 
 }

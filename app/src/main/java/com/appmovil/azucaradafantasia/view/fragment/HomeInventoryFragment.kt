@@ -15,8 +15,6 @@ import com.appmovil.azucaradafantasia.model.Inventory
 import com.appmovil.azucaradafantasia.view.adapter.InventoryAdapter
 import com.appmovil.azucaradafantasia.viewModel.InventoryViewModel
 
-//import com.appmovil.azucaradafantasia.view.adapter.InventoryAdapter
-//import com.appmovil.azucaradafantasia.viewmodel.InventoryViewModel
 class HomeInventoryFragment : Fragment() {
     private lateinit var binding: FragmentHomeInventoryBinding
     private val inventoryViewModel: InventoryViewModel by viewModels() //puedo llamar all lo que venga del viewmodel
@@ -33,7 +31,7 @@ class HomeInventoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         controladores()
-        observerListInventory()
+        observadorViewModel()
     }
 
     //llama los componentes de la vista para tener all mejor ordenado, cuando le dé clic al botón vaya a controladores()
@@ -47,7 +45,7 @@ class HomeInventoryFragment : Fragment() {
 
     private fun observadorViewModel(){
         observerListInventory()  //observo all los cambios en la lista
-        observerProgress()
+
     }
 
     //con esta función tenemos hechas las funcionalidades guardar y listar
@@ -58,18 +56,14 @@ class HomeInventoryFragment : Fragment() {
             val recycler = binding.recyclerview //especifico que la lista es en sentido vertical
             val layoutManager =LinearLayoutManager(context)
             recycler.layoutManager = layoutManager
-            val adapter = InventoryAdapter(listInventory)
+            val adapter = InventoryAdapter(listInventory, findNavController())
             recycler.adapter = adapter
             adapter.notifyDataSetChanged()
 
         }
 
     }
-    private fun observerProgress(){
-        inventoryViewModel.progresState.observe(viewLifecycleOwner){status ->
-            binding.progress.isVisible = status
-        }
-    }
+
 
 
 
