@@ -31,7 +31,7 @@ class HomeInventoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         controladores()
-        observadorViewModel()
+        observerListInventory()
     }
 
     //llama los componentes de la vista para tener all mejor ordenado, cuando le dé clic al botón vaya a controladores()
