@@ -33,11 +33,29 @@ class ItemDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         controladores()
+        dataInventory()
     }
 
     private fun controladores(){
 
 
     }
+
+    //lleno los diferentes textviews con los datos recibidos
+    private fun dataInventory() {
+        val receivedBundle = arguments
+        receivedInventory = receivedBundle?.getSerializable("clave") as Inventory
+        binding.tvItem.text = "${receivedInventory.name}"
+        binding.tvPrice.text = "$ ${receivedInventory.price}"
+        binding.tvQuantity.text = "${receivedInventory.quantity}"
+        binding.txtTotal.text = "$ ${
+            inventoryViewModel.totalProducto(
+                receivedInventory.price,
+                receivedInventory.quantity
+            )
+        }"
+    }
+
+
 
 }
